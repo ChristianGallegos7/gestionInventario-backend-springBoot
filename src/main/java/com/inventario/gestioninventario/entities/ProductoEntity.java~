@@ -1,11 +1,13 @@
 package com.inventario.gestioninventario.entities;
 
 import jakarta.persistence.*;
+import lombok.Data;
 
 import java.math.BigDecimal;
 import java.util.Date;
 
 @Entity
+@Data
 @Table(name = "producto")
 public class ProductoEntity {
     @Id
@@ -20,7 +22,13 @@ public class ProductoEntity {
 
     private Integer cantidadStock;
 
-    private Date fechaCreacion;
+    @ManyToOne
+    @JoinColumn(name = "categoria_id")
+    private CategoriaEntity categoria;
 
-    
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date fechaCreacion;
+    @Temporal(TemporalType.TIMESTAMP)
+
+    private Date fechaActualizacion;
 }
